@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>BookWorms</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    </head>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark custom-background">
+    <div class="container-fluid">
+        <a class="navbar-brand mt-2 mt-lg-0 d-flex align-items-center" href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -4 27 27" fill="#343A40" width="25" height="35">
+                <path d="M6.69 2h10.56c.966 0 1.75.784 1.75 1.75v17.5a.75.75 0 0 1-1.218.585L12 17.21l-5.781 4.626A.75.75 0 0 1 5 21.253L4.94 3.756A1.748 1.748 0 0 1 6.69 2Z"></path>
+            </svg>
+            <h4 class="pt-1 text-dark mb-0"> book<b>Worms</b></h4>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-dark ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link text-dark mt-1" href="#">Dashboard</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark mt-1" href="#">Team</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-dark mt-1" href="#">Projects &nbsp;</a>
+                </li>
+                <li class="nav-item">
+                    <button type="button" class="btn btn-outline-primary mt-1" onclick="myFunction()">Start project
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<br>
+<div id="alertContainer" class="alertContainer" style="display: none;">
+    <div class="alert alert-success alert-dismissible fade show alert-custom" role="alert">
+        Data has been generated successfully!
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+</div>
+
+
+
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div th:each="book : ${listBooks}" class="col-sm test">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ISBN</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Genre</th>
+                    <th>Publisher</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td th:text="${book.ISBN}"></td>
+                    <td th:text="${book.title}"></td>
+                    <td th:text="${book.description}"></td>
+                    <td th:text="${book.genre}"></td>
+                    <td th:text="${book.publisher.name}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <br>
+    </div>
+</div>
+
+<br>
+<br>
+<br>
+
+<footer class="text-center fixed-bottom custom-background" style="padding: 0.5rem;">
+    <div class="text-center">
+        © Copyright:
+        <a class="" href="https://htmlcolorcodes.com/color-picker/">cOlOrPiCkEr</a>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+
+<style>
+.test {
+border: 5px solid #ddd;
+margin-bottom: 10px;
+margin-top: 15px;
+margin-right: 30px;
+margin-left: 30px;
+}
+
+.custom-background {
+    background-color: #DCECFB;
+  }
+  .alert-custom {
+    width:40%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+</style>
+<script>
+function myFunction() {
+    $.ajax({
+        url: "/generateData",
+        type: "POST",
+        success: function(response) {
+           $("#message").text(response);
+            $("#alertContainer").show();
+        },
+        error: function(xhr, status, error) {
+            console.log(error);
+        }
+    });
+}
+
+</script>
+</body>
+</html>
+
+
+
