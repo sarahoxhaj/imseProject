@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>BookWorms</title>
+    <title>Books | BookWorms</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <head>
         <meta charset="UTF-8">
@@ -14,60 +14,18 @@
               href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark custom-background">
-    <div class="container-fluid">
-        <a class="navbar-brand mt-2 mt-lg-0 d-flex align-items-center" href="#">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -4 27 27" fill="#343A40" width="25" height="35">
-                <path d="M6.69 2h10.56c.966 0 1.75.784 1.75 1.75v17.5a.75.75 0 0 1-1.218.585L12 17.21l-5.781 4.626A.75.75 0 0 1 5 21.253L4.94 3.756A1.748 1.748 0 0 1 6.69 2Z"></path>
-            </svg>
-            <h4 class="pt-1 text-dark mb-0"> book<b>Worms</b></h4>
-        </a>
-
-        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
-                data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-            <i class="fas fa-bars"></i>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-dark ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link text-dark mt-1" href="#">Dashboard</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark mt-1" href="#">Team</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark mt-1" href="#">Projects &nbsp;</a>
-                </li>
-                <li class="nav-item">
-                    <button type="button" class="btn btn-outline-primary mt-1" onclick="myFunction()">Start project
-                    </button>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
-<br>
-<div id="alertContainer" class="alertContainer" style="display: none;">
-    <div class="alert alert-success alert-dismissible fade show alert-custom" role="alert">
-        Data has been generated successfully!
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-</div>
-
+<div th:replace="header.html :: header"></div>
 
 
 <div class="container-fluid">
     <div class="row">
         <div th:each="book : ${listBooks}" class="col-sm test">
-            <table class="table">
+
+            <table class="table mb-4">
                 <thead>
                 <tr>
                     <th>ISBN</th>
@@ -87,6 +45,11 @@
                 </tr>
                 </tbody>
             </table>
+            <div class="custom">
+<!--                <a th:href="@{/review}" class="btn btn-outline-warning">Leave a review</a>-->
+                <a th:href="@{'/review/' + ${book.ISBN}}" class="btn btn-outline-warning ">Leave a review</a>
+            </div>
+            <br>
         </div>
         <br>
     </div>
@@ -96,19 +59,8 @@
 <br>
 <br>
 
-<footer class="text-center fixed-bottom custom-background" style="padding: 0.5rem;">
-    <div class="text-center">
-        © Copyright:
-        <a class="" href="https://htmlcolorcodes.com/color-picker/">cOlOrPiCkEr</a>
-    </div>
-</footer>
 
-
-
-
-
-
-
+<div th:replace="footer.html :: footer"></div>
 
 
 <style>
@@ -129,7 +81,40 @@ margin-left: 30px;
     text-align: center;
 }
 
+.ml-custom {
+  margin-left: 260px;
+  margin-top: 10px;
+}
+.ml-test{
+margin-left: 180px;
+}
+
+.custom{
+margin-left: 480px;
+width:40%;
+}
+
+btn-search {
+	  background: #424242;
+	  border-radius: 0;
+	  color: #fff;
+	  border-width: 1px;
+	  border-style: solid;
+	  border-color: #1c1c1c;
+	}
+	.btn-search:link, .btn-search:visited {
+	  color: #fff;
+	}
+	.btn-search:active, .btn-search:hover {
+	  background: #007BFB;
+	  color: #fff;
+	}
+
+
+
 </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
 <script>
 function myFunction() {
     $.ajax({
@@ -144,6 +129,11 @@ function myFunction() {
         }
     });
 }
+
+
+function clearSearch() {
+        window.location = "[[@{/}]]";
+    }
 
 </script>
 </body>

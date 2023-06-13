@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>BookWorms</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  </head>
+</head>
+<body>
+
+
+<footer class="text-center fixed-bottom custom-background" style="padding: 0.5rem;">
+  <div class="text-center">
+    © Copyright:
+    <a class="" href="https://htmlcolorcodes.com/color-picker/">cOlOrPiCkEr</a>
+  </div>
+</footer>
+
+
+<style>
+  .custom-background {
+    background-color: #DCECFB;
+  }
+  .alert-custom {
+    width:40%;
+    margin: 0 auto;
+    text-align: center;
+}
+.ml-custom {
+  margin-left: 260px;
+  margin-top: 10px;
+}
+.ml-test{
+margin-left: 180px;
+}
+
+btn-search {
+	  background: #424242;
+	  border-radius: 0;
+	  color: #fff;
+	  border-width: 1px;
+	  border-style: solid;
+	  border-color: #1c1c1c;
+	}
+	.btn-search:link, .btn-search:visited {
+	  color: #fff;
+	}
+	.btn-search:active, .btn-search:hover {
+	  background: #007BFB;
+	  color: #fff;
+	}
+
+
+
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+<script>
+function myFunction() {
+    $.ajax({
+        url: "/generateData",
+        type: "POST",
+        success: function(response) {
+           $("#message").text(response);
+            $("#alertContainer").show();
+        },
+        error: function(xhr, status, error) {
+            console.log(error);
+        }
+    });
+}
+
+
+function clearSearch() {
+        window.location = "[[@{/}]]";
+    }
+
+
+
+</script>
+
+
+</body>
+</html>

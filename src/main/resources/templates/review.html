@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>BookWorms</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    </head>
+</head>
+<body>
+
+<div th:replace="header.html :: header"></div>
+<br>
+<h4 style="text-align: center"><span th:text="${book.title}" style="color:#00635D;"></span> &nbsp; > &nbsp; Leave a Review</h4>
+<ul style="list-style-type:none; text-align: center">
+    <li th:each="author, index : ${authorNames}">
+        <span th:utext="${index.index == 0 ? '<strong>By:</strong> ' + author : author}"></span>
+    </li>
+</ul>
+
+<br>
+
+<div class="d-flex justify-content-center ml-5">
+    <h6 class="mt-3">My rating: &nbsp;&nbsp;</h6>
+    <div class="rate">
+        <input type="radio" id="star5" name="rate" value="5"/>
+        <label for="star5" title="text">5 stars</label>
+        <input type="radio" id="star4" name="rate" value="4"/>
+        <label for="star4" title="text">4 stars</label>
+        <input type="radio" id="star3" name="rate" value="3"/>
+        <label for="star3" title="text">3 stars</label>
+        <input type="radio" id="star2" name="rate" value="2"/>
+        <label for="star2" title="text">2 stars</label>
+        <input type="radio" id="star1" name="rate" value="1"/>
+        <label for="star1" title="text">1 star</label>
+    </div>
+</div>
+
+<br>
+<div class="d-flex justify-content-center ml-5">
+    <textarea rows="4" cols="50" name="comment" placeholder=" Enter your review here ..."></textarea>
+</div>
+<br>
+<br>
+<div class="text-center ml-5">
+    <button type="submit" class="btn btn-outline-primary m-2">Save</button>
+    <button type="button" class="btn btn-outline-danger m-2" onclick="cancelForm()">Cancel</button>
+</div>
+
+
+
+
+<br> <br> <br>
+<br> <br> <br>
+
+
+<div th:replace="footer.html :: footer"></div>
+
+
+<style>
+    .rate:not(:checked) > input {
+        position:absolute;
+        top:-9999px;
+    }
+
+    .rate:not(:checked) > label {
+        float:right;
+        width:1em;
+        overflow:hidden;
+        white-space:nowrap;
+        cursor:pointer;
+        font-size:30px;
+        color:#ccc;
+    }
+
+
+    .rate:not(:checked) > label:before {
+        content: '★ ';
+    }
+
+
+    .rate > input:checked ~ label {
+        color: #ffc700;
+    }
+
+    .rate:not(:checked) > label:hover,
+    .rate:not(:checked) > label:hover ~ label {
+        color: #deb217;
+    }
+    .rate > input:checked + label:hover,
+    .rate > input:checked + label:hover ~ label,
+    .rate > input:checked ~ label:hover,
+    .rate > input:checked ~ label:hover ~ label,
+    .rate > label:hover ~ input:checked ~ label {
+        color: #c59b08;
+    }
+
+
+
+
+
+
+  .custom-background {
+    background-color: #DCECFB;
+  }
+  .alert-custom {
+    width:40%;
+    margin: 0 auto;
+    text-align: center;
+}
+.ml-custom {
+  margin-left: 260px;
+  margin-top: 10px;
+}
+.ml-test{
+margin-left: 180px;
+}
+
+btn-search {
+	  background: #424242;
+	  border-radius: 0;
+	  color: #fff;
+	  border-width: 1px;
+	  border-style: solid;
+	  border-color: #1c1c1c;
+	}
+	.btn-search:link, .btn-search:visited {
+	  color: #fff;
+	}
+	.btn-search:active, .btn-search:hover {
+	  background: #007BFB;
+	  color: #fff;
+	}
+	.text{
+	color:#343A40;
+	}
+
+
+
+
+
+
+
+
+
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
+
+<script>
+function myFunction() {
+    $.ajax({
+        url: "/generateData",
+        type: "POST",
+        success: function(response) {
+           $("#message").text(response);
+            $("#alertContainer").show();
+        },
+        error: function(xhr, status, error) {
+            console.log(error);
+        }
+    });
+}
+
+
+function clearSearch() {
+        window.location = "[[@{/}]]";
+    }
+
+function cancelForm() {
+    window.location = "[[@{/}]]";
+  }
+</script>
+
+
+</body>
+</html>
