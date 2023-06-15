@@ -10,6 +10,7 @@ import com.github.javafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
 import java.sql.*;
 import java.util.*;
 import java.util.Date;
@@ -30,15 +31,16 @@ public class FakerController {
     private FollowsRepository followsRepository;
     Faker faker = Faker.instance();
     List<Publisher> publishers = new ArrayList<>();
-    String url = "jdbc:mysql://localhost:3307/library";
+    String url = "jdbc:mysql://localhost:3306/library?sessionVariables=sql_mode='NO_ENGINE_SUBSTITUTION'&jdbcCompliantTruncation=false";
     String username = "root";
-    String password = "";
+    String password = "projektreni2021";
 
     @PostMapping("/generateData")
     @ResponseBody
     public String generateData() {
         //user data
         if (!userRepository.findAll().isEmpty()) {
+            reviewRepository.deleteAll();
             userRepository.deleteAll();
         }
         for (int i = 0; i < 10; i++) {
@@ -77,6 +79,7 @@ public class FakerController {
     public String method2() {
         //book data
         //delete query
+        authorRepository.deleteAll();
         String deleteQuery = "DELETE FROM book";
         try (Connection connection = DriverManager.getConnection(url, username, password);
              Statement statement = connection.createStatement()) {
@@ -101,7 +104,6 @@ public class FakerController {
 //            System.out.println(book);
 //            //bookRepository.save(book);
 //        }
-
 
 
         Set<String> uniqueTitles = new HashSet<>();
@@ -142,6 +144,7 @@ public class FakerController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        //bookRepository.deleteAll();
         List<Book> books = bookRepository.findAll();
         for (int i = 0; i < 10; i++) {
             String name = faker.name().fullName();
@@ -162,9 +165,11 @@ public class FakerController {
     public String method4() {
         //review data
         String deleteQuery = "DELETE FROM review";
+        String constraint = "SET FOREIGN_KEY_CHECKS = 0";
         try (Connection connection = DriverManager.getConnection(url, username, password);
              Statement statement = connection.createStatement()) {
             //run query
+            int rowsAffected1 = statement.executeUpdate(constraint);
             int rowsAffected = statement.executeUpdate(deleteQuery);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -187,30 +192,45 @@ public class FakerController {
         return "Fake data for review";
     }
 
-
     public String method5() {
         String deleteQuery = "DELETE FROM follows";
+        String constraint = "SET FOREIGN_KEY_CHECKS = 0";
         try (Connection connection = DriverManager.getConnection(url, username, password);
              Statement statement = connection.createStatement()) {
-            //run query
+            // Run query
+            int rowsAffected1 = statement.executeUpdate(constraint);
             int rowsAffected = statement.executeUpdate(deleteQuery);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        for (int i = 0; i < 10; i++) {
-            User user = new User();
-            user.setId(faker.number().numberBetween(1, 100));
 
-            User follower = new User();
-            follower.setId(faker.number().numberBetween(1, 100));
+        List<User> users = userRepository.findAll();
+        int userCount = users.size();
+
+        if (userCount < 2) {
+            return "Insufficient users to generate follows data";
+        }
+
+        for (int i = 0; i < 10; i++) {
+            int userIndex = faker.number().numberBetween(0, userCount);
+            User user = users.get(userIndex);
+
+            int followerIndex;
+            do {
+                followerIndex = faker.number().numberBetween(0, userCount);
+            } while (followerIndex == userIndex);
+
+            User follower = users.get(followerIndex);
 
             Follows follows = new Follows();
             follows.setUser(user);
             follows.setFollower(follower);
             followsRepository.save(follows);
         }
+
         return "Fake data for follows";
     }
+
 
     private <T> T getRandomElement(List<T> list) {
         Random random = new Random();

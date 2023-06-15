@@ -25,7 +25,7 @@ public class Book {
     private List<Review> reviews;
 
 
-    @OneToMany(mappedBy = "book")
+    @OneToMany(mappedBy = "book",cascade = CascadeType.ALL)
     private List<Author> authors;
 
     @ManyToOne

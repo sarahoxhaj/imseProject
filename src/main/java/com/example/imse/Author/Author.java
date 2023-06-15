@@ -18,7 +18,7 @@ public class Author {
     @Column(nullable = false)
     private Date birthday;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "ISBN", nullable = false)
     private Book book;
 

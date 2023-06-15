@@ -10,17 +10,17 @@ public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private String comment;
-    @Column(nullable = false)
+//    @Column(nullable = false)
     private Integer rating;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "ISBN", nullable = false)
+    @JoinColumn(name = "isbn")
     private Book book;
 
     public Integer getId() {
