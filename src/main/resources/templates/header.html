@@ -1,93 +1,106 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8">
-  <title>BookWorms</title>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-  <head>
     <meta charset="UTF-8">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet"
-          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>BookWorms</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <head>
+        <meta charset="UTF-8">
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.5.0/css/bootstrap.min.css">
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-  </head>
+    </head>
 </head>
 <body>
 
 
-
 <header>
-  <nav class="navbar navbar-expand-lg navbar-dark custom-background" >
-    <div class="container-fluid">
-      <a class="navbar-brand mt-2 mt-lg-0 d-flex align-items-center" href="/">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -4 27 27" fill="#343A40" width="25" height="35">
-          <path d="M6.69 2h10.56c.966 0 1.75.784 1.75 1.75v17.5a.75.75 0 0 1-1.218.585L12 17.21l-5.781 4.626A.75.75 0 0 1 5 21.253L4.94 3.756A1.748 1.748 0 0 1 6.69 2Z"></path>
-        </svg>
-        <h4 class="pt-1 text-dark mb-0"> book<b>Worms</b></h4>
-      </a>
+    <nav class="navbar navbar-expand-lg navbar-dark custom-background">
+        <div class="container-fluid">
+            <a class="navbar-brand mt-2 mt-lg-0 d-flex align-items-center" href="/">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -4 27 27" fill="#343A40" width="25" height="35">
+                    <path d="M6.69 2h10.56c.966 0 1.75.784 1.75 1.75v17.5a.75.75 0 0 1-1.218.585L12 17.21l-5.781 4.626A.75.75 0 0 1 5 21.253L4.94 3.756A1.748 1.748 0 0 1 6.69 2Z"></path>
+                </svg>
+                <h4 class="pt-1 text-dark mb-0"> book<b>Worms</b></h4>
+            </a>
 
-      <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
-              data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-              aria-label="Toggle navigation">
-        <i class="fas fa-bars"></i>
-      </button>
+            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                    data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
 
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-dark ms-auto">
-          <li class="nav-item">
-            <a class="nav-link text-dark mt-1" href="/data">Books&nbsp;&nbsp;&nbsp;</a>
-          </li>
-          <li class="nav-item">
-            <button type="button" class="btn btn-outline-primary mt-1" onclick="myFunction()" style="width: 150px;">Start project</button>
-          </li>
-          <div class="search-container">
-            <form id="searchForm" action="" th:action="@{/search}" method="get">
-              <input id="searchInput" type="text" placeholder="&nbsp;Search.." name="search" class="mt-2 mr-0 ml-test">
-              <span class="input-group-btn">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 text-dark ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark mt-1" href="/data">Books&nbsp;&nbsp;&nbsp;</a>
+                    </li>
+                    <li class="nav-item">
+                        <button type="button" class="btn btn-outline-primary mt-1" onclick="myFunction()"
+                                style="width: 150px;">Start project
+                        </button>
+                    </li>
+                    <div class="search-container">
+                        <form id="searchForm" action="" th:action="@{/search}" method="get">
+                            <input id="searchInput" type="text" placeholder="&nbsp;Search.." name="search"
+                                   class="mt-2 mr-0 ml-test">
+                            <span class="input-group-btn">
                             <button class="btn btn-search" type="submit">
                                 <i class="fa fa-search fa-fw"></i>
                             </button>
                         </span>
-            </form>
-          </div>
-          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-          <li class="nav-item">
-            <a class="nav-link text-dark mt-1" href="/data">My Reviews</a>
-          </li>
-          &nbsp; &nbsp; &nbsp;
-          <li class="nav-item">
-<!--            &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;-->
-            <button type="button" class="btn btn-primary mt-1">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
-                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
-                <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
-              </svg>
-            </button>
+                        </form>
+                    </div>
+                    &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    <li class="nav-item">
+                        <a class="nav-link text-dark mt-1" href="/myreview">My Reviews</a>
+                    </li>
+                    &nbsp; &nbsp; &nbsp;
+                    <li class="nav-item ">
+<!--                        <button type="button" class="btn btn-primary mt-1">-->
+<!--                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"-->
+<!--                                 class="bi bi-person-circle" viewBox="0 0 16 16">-->
+<!--                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>-->
+<!--                                <path fill-rule="evenodd"-->
+<!--                                      d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>-->
+<!--                            </svg>-->
+<!--                        </button>-->
+                        <div class="dropdown mt-1">
+                            <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                User Role
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Reader</a>
+                                <a class="dropdown-item" href="#">Admin</a>
+                            </div>
+                        </div>
+                    </li>
 
-          </li>
-
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <br>
-  <div id="alertContainer" class="alertContainer" style="display: none;">
-    <div class="alert alert-success alert-dismissible fade show alert-custom" role="alert">
-      Data has been generated successfully!
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <br>
-  </div>
+    <div id="alertContainer" class="alertContainer" style="display: none;">
+        <div class="alert alert-success alert-dismissible fade show alert-custom" role="alert">
+            Data has been generated successfully!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <br>
+    </div>
 </header>
-
 
 
 <style>
@@ -107,7 +120,6 @@
 margin-left: 180px;
 }
 
-
 btn-search {
 	  background: #424242;
 	  border-radius: 0;
@@ -123,6 +135,8 @@ btn-search {
 	  background: #007BFB;
 	  color: #fff;
 	}
+
+
 
 
 
@@ -149,6 +163,7 @@ function myFunction() {
 function clearSearch() {
         window.location = "[[@{/}]]";
     }
+
 
 
 

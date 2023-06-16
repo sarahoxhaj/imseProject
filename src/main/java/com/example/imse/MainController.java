@@ -43,11 +43,6 @@ public class MainController {
         return "review";
     }
 
-    @PostMapping("/review/save")
-    public String saveReview(Review review) {
-        reviewService.save(review);
-        return "index";
-    }
 
 
 

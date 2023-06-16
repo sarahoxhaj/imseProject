@@ -22,10 +22,10 @@ public class User {
     private String email;
     @Column(nullable = false)
     private char[] password;
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<Review> reviews;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private List<Follows> following;
 
     @OneToMany(mappedBy = "follower")

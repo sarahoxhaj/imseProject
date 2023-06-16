@@ -73,5 +73,23 @@ public class Review {
                 ", book=" + book +
                 '}';
     }
+
+    public void setUserId(Integer userId) {
+        if (this.user == null) {
+            this.user = new User();
+        }
+        this.user.setId(userId);
+    }
+
+    public void setBookISBN(Integer bookISBN){
+        if(this.book==null){
+            this.book=new Book();
+        }
+        this.book.setISBN(bookISBN);
+    }
+
+
+
+
 }
 

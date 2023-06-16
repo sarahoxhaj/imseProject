@@ -13,7 +13,7 @@ import java.util.List;
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer ISBN;
+    private Integer isbn;
     @Column(nullable = false, unique = true)
     private String title;
     @Column(nullable = false)
@@ -33,11 +33,11 @@ public class Book {
     private Publisher publisher;
 
     public Integer getISBN() {
-        return ISBN;
+        return isbn;
     }
 
     public void setISBN(Integer ISBN) {
-        this.ISBN = ISBN;
+        this.isbn = isbn;
     }
 
     public String getTitle() {
@@ -91,7 +91,7 @@ public class Book {
     @Override
     public String toString() {
         return "Book{" +
-                "ISBN=" + ISBN +
+                "ISBN=" + isbn +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", genre='" + genre + '\'' +

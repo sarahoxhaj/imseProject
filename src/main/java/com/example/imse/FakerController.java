@@ -9,6 +9,7 @@ import com.example.imse.User.*;
 import com.github.javafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.sql.*;
@@ -37,7 +38,7 @@ public class FakerController {
 
     @PostMapping("/generateData")
     @ResponseBody
-    public String generateData() {
+    public String generateData(Model model) {
         //user data
         if (!userRepository.findAll().isEmpty()) {
             reviewRepository.deleteAll();
@@ -56,6 +57,7 @@ public class FakerController {
         method1();
         return "Fake data for user";
     }
+
 
     public String method1() {
         //publisher data
