@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Book | BookWorms</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+</head>
+<body>
+<div th:replace="header.html :: header"></div>
+
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title text-center mb-4">Add Book</h5>
+          <form th:action="@{/addBook}" method="post">
+            <div class="mb-3">
+              <label for="bookId" class="form-label">ISBN</label>
+                <input disabled type="text" class="form-control" id="bookId" name="bookId">
+<!--              <input type="text" class="form-control" id="bookId" name="bookId">-->
+            </div>
+            <div class="mb-3">
+              <label for="bookTitle" class="form-label">Title</label>
+              <input type="text" class="form-control" id="bookTitle" name="title">
+            </div>
+            <div class="mb-3">
+              <label for="bookDescription" class="form-label">Description</label>
+              <input type="text" class="form-control" id="bookDescription" name="description">
+            </div>
+            <div class="mb-3">
+              <label for="bookGenre" class="form-label">Genre</label>
+              <input type="text" class="form-control" id="bookGenre" name="genre">
+            </div>
+            <div class="mb-3">
+              <label for="bookPublisher" class="form-label">Publisher</label>
+              <input type="text" class="form-control" id="bookPublisher" name="publisher">
+            </div>
+            <div class="text-center">
+              <a class="btn btn-secondary" href="/data">Cancel</a>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<br>
+<br>
+<br>
+<div th:replace="footer.html :: footer"></div>
+<style>
+.test {
+border: 5px solid #ddd;
+margin-bottom: 10px;
+margin-top: 15px;
+margin-right: 30px;
+margin-left: 30px;
+}
+
+.custom-background {
+    background-color: #DCECFB;
+  }
+  .alert-custom {
+    width:40%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.ml-custom {
+  margin-left: 260px;
+  margin-top: 10px;
+}
+.ml-test{
+margin-left: 180px;
+}
+
+.custom{
+margin-left: 480px;
+width:40%;
+}
+
+btn-search {
+	  background: #424242;
+	  border-radius: 0;
+	  color: #fff;
+	  border-width: 1px;
+	  border-style: solid;
+	  border-color: #1c1c1c;
+	}
+	.btn-search:link, .btn-search:visited {
+	  color: #fff;
+	}
+	.btn-search:active, .btn-search:hover {
+	  background: #007BFB;
+	  color: #fff;
+	}
+</style>
+</body>
+</html>

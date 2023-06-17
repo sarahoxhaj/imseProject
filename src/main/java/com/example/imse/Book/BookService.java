@@ -30,5 +30,12 @@ public class BookService {
         return book;
     }
 
+    public Book addBook(Book book) {
+        return repo.save(book);
+    }
+
+    public List<Object[]> getBooksWithoutReviews() {
+        return repo.getBooksWithoutReviews();
+    }
 
 }

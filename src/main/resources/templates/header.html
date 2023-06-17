@@ -62,26 +62,32 @@
                     </div>
                     &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
                     &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                    <li class="nav-item">
+                    <li class="nav-item" id="myReviewsButton">
                         <a class="nav-link text-dark mt-1" href="/myreview">My Reviews</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark mt-1" href="/noReviews"> Books without reviews</a>
+                    </li>
+                    <li class="nav-item" id="addBookButton">
+                        <a class="nav-link text-dark mt-1" href="/newBook">Add Book</a>
                     </li>
                     &nbsp; &nbsp; &nbsp;
                     <li class="nav-item ">
-<!--                        <button type="button" class="btn btn-primary mt-1">-->
-<!--                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"-->
-<!--                                 class="bi bi-person-circle" viewBox="0 0 16 16">-->
-<!--                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>-->
-<!--                                <path fill-rule="evenodd"-->
-<!--                                      d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>-->
-<!--                            </svg>-->
-<!--                        </button>-->
+                        <!--                        <button type="button" class="btn btn-primary mt-1">-->
+                        <!--                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"-->
+                        <!--                                 class="bi bi-person-circle" viewBox="0 0 16 16">-->
+                        <!--                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>-->
+                        <!--                                <path fill-rule="evenodd"-->
+                        <!--                                      d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>-->
+                        <!--                            </svg>-->
+                        <!--                        </button>-->
                         <div class="dropdown mt-1">
                             <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 User Role
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Reader</a>
-                                <a class="dropdown-item" href="#">Admin</a>
+                                <a class="dropdown-item" href="#" data-role="reader">Reader</a>
+                                <a class="dropdown-item" href="#" data-role="admin">Admin</a>
                             </div>
                         </div>
                     </li>
@@ -159,13 +165,36 @@ function myFunction() {
     });
 }
 
-
 function clearSearch() {
         window.location = "[[@{/}]]";
     }
 
+$(document).ready(function() {
+    // Hide the Add Book button by default
+    $('#addBookButton').hide();
 
+    // Assign the default role as "reader"
+    var selectedRole = "reader";
+    updateButtonVisibility(selectedRole);
 
+    // Handle the role selection
+    $('.dropdown-item').click(function(e) {
+        e.preventDefault();
+        selectedRole = $(this).data('role');
+        updateButtonVisibility(selectedRole);
+    });
+
+    // Function to show/hide the Add Book button based on the selected role
+    function updateButtonVisibility(role) {
+                console.log("Selected role:", role); // Print the selected role in the console
+
+        if (role === "reader") {
+            $('#addBookButton').hide();
+        } else if (role === "admin") {
+            $('#addBookButton').show();
+        }
+    }
+});
 
 </script>
 
