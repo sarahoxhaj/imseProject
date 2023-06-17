@@ -17,7 +17,7 @@ public interface BookRepository extends JpaRepository<Book, Integer> {
 //            "LEFT JOIN book.authors author " +
             "GROUP BY book.publisher.name " +
             "HAVING COUNT(review) = 0")
-//    columns: publisher name, book name and author name
+//    columns: publisher name, book name and author namee
 
     List<Object[]> getBooksWithoutReviews();
 
