@@ -1,5 +1,7 @@
 package com.example.imse.Book;
 
+import com.example.imse.Publisher.Publisher;
+import com.example.imse.Publisher.PublisherService;
 import com.example.imse.Review.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -11,8 +13,13 @@ import java.util.List;
 
 @Controller
 public class BookController {
+
+    Publisher publisher;
     @Autowired
     private BookService service;
+
+    @Autowired
+    private PublisherService publisherService;
 
     @GetMapping("/data")
     public String showBookList(Model model) {
@@ -27,9 +34,15 @@ public class BookController {
     }
 
     @PostMapping("/addBook")
-    public String addBook(Book book) {
+    public String addBook(Book book, @RequestParam("publisherName") String publisherName) {
         System.out.println("Book Title -> " + book.getTitle());
-        this.service.addBook(book);
+        Publisher publisher = publisherService.findByPublisherName(publisherName);
+        if (publisher == null) {
+
+        } else {
+            book.setPublisher(publisher);
+            this.service.addBook(book);
+        }
         return "redirect:/data";
     }
 
