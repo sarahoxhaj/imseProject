@@ -21,12 +21,12 @@
 <div th:replace="header.html :: header"></div>
 
 <div class="d-flex justify-content-center">
-    <a href="/report1" class="btn btn-outline-secondary">Report 1 &nbsp; | &nbsp; Top 5 books with most reviews and their publisher</a>
+    <a href="/report1" class="btn btn-outline-secondary">Report 1 &nbsp; | &nbsp; Top 5 books with the most reviews and their publisher</a>
 </div>
 <br>
 <div class="container-fluid">
     <div class="row">
-        <div th:each="review : ${listReviews}" th:if="${review.user.id == 221}" class="col-sm test">
+        <div th:each="review : ${listReviews}" th:if="${review.user.id == 301}" class="col-sm test">
 
             <table class="table mb-4">
                 <thead>

@@ -1,11 +1,19 @@
 package com.example.imse;
 
-import com.example.imse.Author.*;
-import com.example.imse.Book.*;
-import com.example.imse.Follows.*;
-import com.example.imse.Publisher.*;
-import com.example.imse.Review.*;
-import com.example.imse.User.*;
+
+import com.example.imse.sql.Author.Author;
+import com.example.imse.sql.Author.AuthorRepository;
+import com.example.imse.sql.Book.Book;
+import com.example.imse.sql.Book.BookRepository;
+import com.example.imse.sql.Book.BookService;
+import com.example.imse.sql.Follows.Follows;
+import com.example.imse.sql.Follows.FollowsRepository;
+import com.example.imse.sql.Publisher.Publisher;
+import com.example.imse.sql.Publisher.PublisherRepository;
+import com.example.imse.sql.Review.Review;
+import com.example.imse.sql.Review.ReviewRepository;
+import com.example.imse.sql.User.User;
+import com.example.imse.sql.User.UserRepository;
 import com.github.javafaker.Faker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,11 +38,33 @@ public class FakerController {
     private AuthorRepository authorRepository;
     @Autowired
     private FollowsRepository followsRepository;
+
+    @Autowired
+    private BookService bookService;
     Faker faker = Faker.instance();
+
     List<Publisher> publishers = new ArrayList<>();
+
+    public FakerController() {
+    }
+
     String url = "jdbc:mysql://localhost:3306/library?sessionVariables=sql_mode='NO_ENGINE_SUBSTITUTION'&jdbcCompliantTruncation=false";
     String username = "root";
     String password = "projektreni2021";
+
+
+    @Autowired
+    public FakerController(BookService bookService) {
+        this.bookService = bookService;
+    }
+
+    @PostMapping("/migrate")
+    @ResponseBody
+    public String migrate(Model model) {
+        bookService.migrateData();
+        return "index";
+    }
+
 
     @PostMapping("/generateData")
     @ResponseBody
@@ -44,6 +74,7 @@ public class FakerController {
             reviewRepository.deleteAll();
             userRepository.deleteAll();
         }
+
         for (int i = 0; i < 10; i++) {
             String username = faker.name().username();
             String email = faker.internet().emailAddress();
@@ -146,6 +177,7 @@ public class FakerController {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         //bookRepository.deleteAll();
         List<Book> books = bookRepository.findAll();
         for (int i = 0; i < 10; i++) {
@@ -153,16 +185,23 @@ public class FakerController {
             String description = faker.lorem().sentence();
             Date birthday = faker.date().birthday();
             Book randomBook = getRandomElement(books);
+
             Author author = new Author();
             author.setName(name);
             author.setDescription(description);
             author.setBirthday(birthday);
-            author.setBook(randomBook);
+
+            List<Book> authorBooks = new ArrayList<>();
+            authorBooks.add(randomBook);
+            author.setBooks(authorBooks);
+
             authorRepository.save(author);
         }
+
         method4();
         return "Fake data for author";
     }
+
 
     public String method4() {
         //review data

@@ -1,10 +1,11 @@
 package com.example.imse;
 
-import com.example.imse.Author.Author;
-import com.example.imse.Book.Book;
-import com.example.imse.Book.BookService;
-import com.example.imse.Review.Review;
-import com.example.imse.Review.ReviewService;
+
+
+import com.example.imse.sql.Author.Author;
+import com.example.imse.sql.Book.Book;
+import com.example.imse.sql.Book.BookService;
+import com.example.imse.sql.Review.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
