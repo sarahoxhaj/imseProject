@@ -24,7 +24,7 @@
 <br>
 <div class="container-fluid">
     <div class="row">
-        <div th:each="review : ${topBooks}" class="col-sm test">
+        <div th:each="book : ${topBooks}" class="col-sm test">
             <table class="table mb-4">
                 <thead>
                 <tr>
@@ -34,8 +34,8 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td th:text="${review[0]}"></td>
-                    <td th:text="${review[1]}"></td>
+                    <td th:text="${book[0]}"></td>
+                    <td th:text="${book[1]}"></td>
                 </tr>
                 </tbody>
             </table>

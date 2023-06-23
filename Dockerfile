@@ -29,6 +29,7 @@ COPY --from=build /app/target/*.jar app.jar
 EXPOSE 8080
 EXPOSE 3306
 EXPOSE 9999
+EXPOSE 9991
 
 # Specify the command to run your application
 ENTRYPOINT ["java", "-jar", "app.jar"]

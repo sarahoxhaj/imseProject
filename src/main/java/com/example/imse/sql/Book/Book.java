@@ -1,7 +1,7 @@
 package com.example.imse.sql.Book;
 
 import com.example.imse.sql.Author.Author;
-import com.example.imse.sql.Publisher.Publisher;
+import com.example.imse.nosql.Publisher.Publisher.Publisher;
 import com.example.imse.sql.Review.Review;
 import jakarta.persistence.*;
 
@@ -24,8 +24,6 @@ public class Book {
     private List<Review> reviews;
 
 
-//    @OneToMany(mappedBy = "book",cascade = CascadeType.ALL)
-//    private List<Author> authors;
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "book_author",
@@ -43,7 +41,7 @@ public class Book {
         return isbn;
     }
 
-    public void setISBN(Integer ISBN) {
+    public void setISBN(Integer isbn) {
         this.isbn = isbn;
     }
 

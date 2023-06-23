@@ -1,6 +1,7 @@
 package com.example.imse.sql.Book;
 
 
+import com.example.imse.nosql.Book.BookMongoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -39,32 +40,9 @@ public class BookService {
     }
 
 
-
     @Autowired
     public BookService(BookRepository bookRepository, BookMongoRepository bookMongoRepository) {
         this.repo = bookRepository;
         this.bookMongoRepository = bookMongoRepository;
     }
-    public void migrateData() {
-        List<Book> books = repo.findAll();
-        for (Book book : books) {
-            BookMongo bookMongo = convertToBookMongo(book);
-            bookMongoRepository.save(bookMongo);
-        }
-    }
-    private BookMongo convertToBookMongo(Book book) {
-        BookMongo bookMongo = new BookMongo();
-        bookMongo.setMongoIsbn(book.getIsbn());
-        bookMongo.setTitle(book.getTitle());
-        bookMongo.setDescription(book.getDescription());
-        bookMongo.setGenre(book.getGenre());
-        bookMongo.setAuthors(book.getAuthors());
-        bookMongo.setPublisher(book.getPublisher());
-        return bookMongo;
-    }
-
-
-
-
-
 }

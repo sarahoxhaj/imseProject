@@ -2,6 +2,9 @@ package com.example.imse;
 
 
 
+import com.example.imse.nosql.Author.AuthorMongo;
+import com.example.imse.nosql.Book.BookMongo;
+import com.example.imse.nosql.Book.BookMongoRepository;
 import com.example.imse.sql.Author.Author;
 import com.example.imse.sql.Book.Book;
 import com.example.imse.sql.Book.BookService;
@@ -11,8 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,10 +22,9 @@ import java.util.stream.Collectors;
 public class MainController {
 
     @Autowired
-    private BookService service;
-
+    private BookService bookService;
     @Autowired
-    private ReviewService reviewService;
+    private BookMongoRepository bookMongoRepository;
 
     @GetMapping("")
     public String showHomePage() {
@@ -32,15 +32,29 @@ public class MainController {
     }
 
     @GetMapping("/review/{id}")
-    public String showReviewForm(@PathVariable(value = "id") Integer id, Model model) {
-        Book book = service.getBookByISBN(id);
-        List<Author> authors = book.getAuthors();
-        List<String> authorNames = authors.stream()
-                .map(Author::getName)
-                .collect(Collectors.toList());
-
-        model.addAttribute("book",book);
+    public String showReviewForm(@PathVariable(value = "id") String id, Model model) {
+        List<String> authorNames;
+        if(DataMigration.isSql()){
+            // ids in sql database are numbers, whereas in mongo they are UUIDs
+            var id2= Integer.parseInt(id);
+            Book book = bookService.getBookByISBN(id2);
+            List<Author> authors = book.getAuthors();
+            authorNames = authors.stream()
+                    .map(Author::getName)
+                    .collect(Collectors.toList());
+            model.addAttribute("book",book);
+        }
+        else
+        {
+            BookMongo bookMongo= bookMongoRepository.findById(id).orElse(null);
+            List<AuthorMongo> authors = bookMongo.getAuthors();
+            authorNames = authors.stream()
+                    .map(AuthorMongo::getName)
+                    .collect(Collectors.toList());
+            model.addAttribute("book",bookMongo);
+        }
         model.addAttribute("authorNames", authorNames);
+
         return "review";
     }
 

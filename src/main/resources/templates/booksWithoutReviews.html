@@ -35,6 +35,7 @@
         <tr>
           <th>ISBN</th>
           <th>Title</th>
+          <th>Author(s)</th>
           <th>Description</th>
           <th>Genre</th>
           <th>Publisher</th>
@@ -42,8 +43,13 @@
         </thead>
         <tbody>
         <tr>
-          <td th:text="${book.ISBN}"></td>
+          <td th:text="${book.isbn}"></td>
           <td th:text="${book.title}"></td>
+          <td>
+            <ul>
+              <li th:each="author : ${book.authors}" th:text="${author.name}"></li>
+            </ul>
+          </td>
           <td th:text="${book.description}"></td>
           <td th:text="${book.genre}"></td>
           <td th:text="${book.publisher.name}"></td>
@@ -52,7 +58,7 @@
       </table>
       <div class="custom">
         <!--                <a th:href="@{/review}" class="btn btn-outline-warning">Leave a review</a>-->
-        <a th:href="@{'/review/' + ${book.ISBN}}" class="btn btn-outline-warning ">Leave a review</a>
+        <a th:href="@{'/review/' + ${book.isbn}}" class="btn btn-outline-warning ">Leave a review</a>
       </div>
       <br>
     </div>

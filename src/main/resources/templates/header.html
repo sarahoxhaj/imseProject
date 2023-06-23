@@ -49,40 +49,28 @@
                                 style="width: 150px;">Start project
                         </button>
                     </li>
-                    <div class="search-container">
-                        <form id="searchForm" action="" th:action="@{/search}" method="get">
-                            <input id="searchInput" type="text" placeholder="&nbsp;Search.." name="search"
-                                   class="mt-2 mr-0 ml-test">
-                            <span class="input-group-btn">
-                            <button class="btn btn-search" type="submit">
-                                <i class="fa fa-search fa-fw"></i>
-                            </button>
-                        </span>
-                        </form>
-                    </div>
-                    &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
-                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+
+                    &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+                    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
                     <li class="nav-item" id="myReviewsButton">
-                        <a class="nav-link text-dark mt-1" href="/myreview">My Reviews</a>
+                        <a class="nav-link text-dark mt-1" href="/myreview">My Reviews&nbsp; | </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-dark mt-1" href="/noReviews"> Books without reviews</a>
+                        <a class="nav-link text-dark mt-1" href="/noReviews"> Books without reviews&nbsp; | </a>
                     </li>
                     <li class="nav-item" id="addBookButton">
                         <a class="nav-link text-dark mt-1" href="/newBook">Add Book</a>
                     </li>
                     &nbsp; &nbsp; &nbsp;
                     <li class="nav-item ">
-                        <!--                        <button type="button" class="btn btn-primary mt-1">-->
-                        <!--                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"-->
-                        <!--                                 class="bi bi-person-circle" viewBox="0 0 16 16">-->
-                        <!--                                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>-->
-                        <!--                                <path fill-rule="evenodd"-->
-                        <!--                                      d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>-->
-                        <!--                            </svg>-->
-                        <!--                        </button>-->
                         <div class="dropdown mt-1">
-                            <button class="btn btn-outline-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button class="btn btn-outline-primary dropdown-toggle" type="button"
+                                    id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+                                    aria-expanded="false">
                                 User Role
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -100,6 +88,15 @@
     <div id="alertContainer" class="alertContainer" style="display: none;">
         <div class="alert alert-success alert-dismissible fade show alert-custom" role="alert">
             Data has been generated successfully!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <br>
+    </div>
+    <div id="migrationContainer" class="migrationContainer" style="display: none;">
+        <div class="alert alert-success alert-dismissible fade show alert-custom" role="alert">
+            Data has been migrated successfully!
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -126,31 +123,19 @@
 margin-left: 180px;
 }
 
-btn-search {
-	  background: #424242;
-	  border-radius: 0;
-	  color: #fff;
-	  border-width: 1px;
-	  border-style: solid;
-	  border-color: #1c1c1c;
-	}
-	.btn-search:link, .btn-search:visited {
-	  color: #fff;
-	}
-	.btn-search:active, .btn-search:hover {
-	  background: #007BFB;
-	  color: #fff;
-	}
-
-
-
-
-
 </style>
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.min.js"></script>
 <script>
+
+function onClickAdmin(){
+        document.getElementById('addBookButton').style.visibility = 'visible';console.log("visible")}
+    function onClickUser(){
+        document.getElementById('addBookButton').style.visibility = 'hidden';
+        console.log("hidden")
+    }
+
 function myFunction() {
     $.ajax({
         url: "/generateData",
@@ -164,10 +149,6 @@ function myFunction() {
         }
     });
 }
-
-function clearSearch() {
-        window.location = "[[@{/}]]";
-    }
 
 $(document).ready(function() {
     // Hide the Add Book button by default
@@ -195,6 +176,7 @@ $(document).ready(function() {
         }
     }
 });
+
 
 </script>
 

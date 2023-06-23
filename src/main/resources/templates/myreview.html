@@ -26,7 +26,7 @@
 <br>
 <div class="container-fluid">
     <div class="row">
-        <div th:each="review : ${listReviews}" th:if="${review.user.id == 301}" class="col-sm test">
+        <div th:each="review : ${listReviews}" th:if="${review.user.id == 1 || review.user.id == '1'}" class="col-sm test">
 
             <table class="table mb-4">
                 <thead>

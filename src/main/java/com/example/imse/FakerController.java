@@ -8,8 +8,8 @@ import com.example.imse.sql.Book.BookRepository;
 import com.example.imse.sql.Book.BookService;
 import com.example.imse.sql.Follows.Follows;
 import com.example.imse.sql.Follows.FollowsRepository;
-import com.example.imse.sql.Publisher.Publisher;
-import com.example.imse.sql.Publisher.PublisherRepository;
+import com.example.imse.nosql.Publisher.Publisher.Publisher;
+import com.example.imse.nosql.Publisher.Publisher.PublisherRepository;
 import com.example.imse.sql.Review.Review;
 import com.example.imse.sql.Review.ReviewRepository;
 import com.example.imse.sql.User.User;
@@ -38,9 +38,9 @@ public class FakerController {
     private AuthorRepository authorRepository;
     @Autowired
     private FollowsRepository followsRepository;
-
     @Autowired
-    private BookService bookService;
+    private DataMigration dataMigration;
+
     Faker faker = Faker.instance();
 
     List<Publisher> publishers = new ArrayList<>();
@@ -48,23 +48,22 @@ public class FakerController {
     public FakerController() {
     }
 
-    String url = "jdbc:mysql://localhost:3306/library?sessionVariables=sql_mode='NO_ENGINE_SUBSTITUTION'&jdbcCompliantTruncation=false";
+    String url = "jdbc:mysql://localhost:3306/library2?sessionVariables=sql_mode='NO_ENGINE_SUBSTITUTION'&jdbcCompliantTruncation=false";
     String username = "root";
-    String password = "projektreni2021";
+    String password = "password";
 
 
     @Autowired
-    public FakerController(BookService bookService) {
-        this.bookService = bookService;
+    public FakerController(DataMigration dataMigration) {
+        this.dataMigration = dataMigration;
     }
 
-    @PostMapping("/migrate")
+    @PostMapping("/migrateData")
     @ResponseBody
     public String migrate(Model model) {
-        bookService.migrateData();
+        dataMigration.migrateData();
         return "index";
     }
-
 
     @PostMapping("/generateData")
     @ResponseBody
@@ -122,21 +121,6 @@ public class FakerController {
             e.printStackTrace();
         }
 
-//        for (int i = 0; i < 10; i++) {
-//            String title = faker.book().title();
-//            String description = faker.lorem().paragraph();
-//            String genre = faker.book().genre();
-//            //pick random publisher
-//            Random random = new Random();
-//            Publisher randomPublisher = publishers.get(random.nextInt(publishers.size()));
-//            Book book = new Book();
-//            book.setTitle(title);
-//            book.setDescription(description);
-//            book.setGenre(genre);
-//            book.setPublisher(randomPublisher);
-//            System.out.println(book);
-//            //bookRepository.save(book);
-//        }
 
 
         Set<String> uniqueTitles = new HashSet<>();
