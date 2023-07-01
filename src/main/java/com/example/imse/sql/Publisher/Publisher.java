@@ -1,4 +1,4 @@
-package com.example.imse.nosql.Publisher.Publisher;
+package com.example.imse.sql.Publisher;
 
 import com.example.imse.sql.Book.Book;
 import jakarta.persistence.*;

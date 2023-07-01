@@ -1,5 +1,7 @@
 package com.example.imse;
 
+import com.example.imse.sql.Publisher.Publisher;
+import com.example.imse.sql.Publisher.PublisherRepository;
 import com.example.imse.nosql.Publisher.PublisherMongo;
 import com.example.imse.nosql.Publisher.PublisherMongoRepository;
 import com.example.imse.sql.Author.Author;
@@ -14,8 +16,6 @@ import com.example.imse.sql.Follows.Follows;
 import com.example.imse.nosql.Follows.FollowsMongo;
 import com.example.imse.nosql.Follows.FollowsMongoRepository;
 import com.example.imse.sql.Follows.FollowsRepository;
-import com.example.imse.nosql.Publisher.Publisher.Publisher;
-import com.example.imse.nosql.Publisher.Publisher.PublisherRepository;
 import com.example.imse.sql.Review.Review;
 import com.example.imse.nosql.Review.ReviewMongo;
 import com.example.imse.nosql.Review.ReviewMongoRepository;

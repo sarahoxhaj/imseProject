@@ -1,7 +1,7 @@
 package com.example.imse.sql.Book;
 
 import com.example.imse.sql.Author.Author;
-import com.example.imse.nosql.Publisher.Publisher.Publisher;
+import com.example.imse.sql.Publisher.Publisher;
 import com.example.imse.sql.Review.Review;
 import jakarta.persistence.*;
 
